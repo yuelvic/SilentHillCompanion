@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_small">
+
+    <TextView
+        android:id="@+id/tv_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Light (state / blink)"/>
+
+    <ToggleButton
+        android:id="@+id/toggle_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_light"/>
+
+    <ToggleButton
+        android:id="@+id/toggle_light_blink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/toggle_light"
+        android:layout_below="@id/tv_light"/>
+
+    <TextView
+        android:id="@+id/tv_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggle_light"
+        android:text="Call"/>
+
+    <ToggleButton
+        android:id="@+id/toggle_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_call"/>
+
+    <TextView
+        android:id="@+id/tv_sfx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toggle_call"
+        android:text="SFX"/>
+
+    <Spinner
+        android:id="@+id/spinner_device"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_below="@id/tv_sfx"/>
+
+    <LinearLayout
+        android:id="@+id/row_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_device"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Theme"/>
+
+        <Button
+            android:id="@+id/btn_bang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bang"/>
+
+        <Button
+            android:id="@+id/btn_pyramid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pyramid"/>
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_1">
+
+        <Button
+            android:id="@+id/btn_siren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siren"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

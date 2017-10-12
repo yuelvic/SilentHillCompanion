@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Silent Hill Companion</string>
+
+    <string name="button_remote">Remote</string>
+    <string name="button_actor">Actor</string>
+
+    <string name="button_remote_light_on">Light On</string>
+    <string name="button_remote_light_off">Light Off</string>
+    <string name="button_remote_siren_on">Siren On</string>
+    <string name="button_remote_siren_off">Siren Off</string>
+    <string name="button_remote_call">Call</string>
+
+    <string name="text_call_caller">Alessa</string>
+
+    <string name="group_light">Light</string>
+    <string name="group_call">Call</string>
+    <string name="group_sfx">SFX</string>
+
+    <!--List of actors-->
+    <string-array name="array_actors">
+        <item>@string/group_light</item>
+        <item>@string/group_call</item>
+        <item>@string/group_sfx</item>
+    </string-array>
+
+    <!--List of test devices-->
+    <string-array name="array_devices">
+        <item>Galaxy S8</item>
+        <item>HTC One_M8</item>
+        <item>ASUS_X013D</item>
+    </string-array>
+</resources>

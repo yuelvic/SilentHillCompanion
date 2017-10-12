@@ -1,0 +1,14 @@
+{
+  "name": "silenthillserver",
+  "version": "1.0.0",
+  "description": "Silent Hill server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Emmanuel Victor Garcia",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^3.2.0"
+  }
+}
