@@ -75,10 +75,10 @@
             android:text="Pyramid"/>
 
         <Button
-            android:id="@+id/btn_stop"
+            android:id="@+id/btn_pov"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Stop"/>
+            android:text="POV"/>
 
     </LinearLayout>
 
@@ -94,6 +94,50 @@
             android:layout_height="wrap_content"
             android:text="Siren"/>
 
+        <Button
+            android:id="@+id/btn_insect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insect"/>
+
+        <Button
+            android:id="@+id/btn_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospital"/>
+
+        <Button
+            android:id="@+id/btn_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"/>
+
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/row_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/row_2">
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"/>
+
+        <Button
+            android:id="@+id/btn_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_steps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

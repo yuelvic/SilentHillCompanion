@@ -16,6 +16,7 @@
     <string name="group_call">Call</string>
     <string name="group_sfx">SFX</string>
 
+
     <!--List of actors-->
     <string-array name="array_actors">
         <item>@string/group_light</item>
@@ -25,8 +26,12 @@
 
     <!--List of test devices-->
     <string-array name="array_devices">
-        <item>Galaxy S8</item>
-        <item>HTC One_M8</item>
+        <item>All</item>
+        <item>Liquid Zest Plus</item>
+        <item>T02</item>
+        <item>1201</item>
         <item>ASUS_X013D</item>
+        <item>HTC One_M8</item>
+        <item>Galaxy S8</item>
     </string-array>
 </resources>

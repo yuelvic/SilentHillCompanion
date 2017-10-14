@@ -15,7 +15,11 @@ enum class Action(val action: String) {
     SFX_STOP("sfx_stop"),
     SFX_THEME("sfx_theme"),
     SFX_PYRAMID("sfx_pyramid"),
+    SFX_PYRAMID_POV("sfx_pyramid_pov"),
     SFX_SIREN("sfx_siren"),
+    SFX_INSECT("sfx_insect"),
+    SFX_HOSPITAL("sfx_hospital"),
+    SFX_OTHER_WORLD("sfx_other_world"),
     SFX_BANG("sfx_bang"),
 
     VOLUME_UP("volume_up"),

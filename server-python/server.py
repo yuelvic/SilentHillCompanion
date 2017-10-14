@@ -1,13 +1,17 @@
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 
+clients = []
 class SimpleEcho(WebSocket):
 
     def handleMessage(self):
-        # echo message back to client
-        self.sendMessage(self.data)
-	    print(self.data)
+        # echo message back to clients
+        for client in clients:
+            if client != self:
+                client.sendMessage(self.data)
+        print(self.data)
 
     def handleConnected(self):
+        clients.append(self)
         print(self.address, 'connected')
 
     def handleClose(self):

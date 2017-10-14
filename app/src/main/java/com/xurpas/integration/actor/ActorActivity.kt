@@ -52,7 +52,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
     override fun onReceive(text: String) {
         val message: Message = gson.fromJson(text, Message::class.java) // parse command
 
-        if (message.device != deviceName) return
+        if (message.device != deviceName && message.device != "All") return
 
         when (message.action) {
             Action.CALL_ON.action -> call()
@@ -66,7 +66,11 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
             Action.SFX_THEME.action -> playSFX(R.raw.theme)
             Action.SFX_BANG.action -> playSFX(R.raw.bang)
             Action.SFX_PYRAMID.action -> playSFX(R.raw.pyramid)
+            Action.SFX_PYRAMID_POV.action -> playSFX(R.raw.pyramid_pov)
             Action.SFX_SIREN.action -> playSFX(R.raw.siren)
+            Action.SFX_INSECT.action -> playSFX(R.raw.insect)
+            Action.SFX_HOSPITAL.action -> playSFX(R.raw.hospital)
+            Action.SFX_OTHER_WORLD.action -> playSFX(R.raw.otherworld)
 
             Action.VOLUME_UP.action -> volumeUp()
             Action.VOLUME_DOWN.action -> volumeDown()
@@ -227,7 +231,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && blink) {
                 Thread(Runnable {
-                    Thread.sleep(500)
+                    Thread.sleep(100)
                     cameraManager.setTorchMode(cameraId, !enabled)
                 }).start()
             }

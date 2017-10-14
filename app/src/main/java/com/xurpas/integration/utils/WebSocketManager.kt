@@ -26,7 +26,7 @@ class WebSocketManager(gson: Gson, callback: Callback): WebSocketListener() {
                 .build()
 
         val request = Request.Builder()
-                .url("ws://localhost:8000")
+                .url("ws://192.168.2.193:8000")
                 .build()
         webSocket = client.newWebSocket(request, this)
         client.dispatcher().executorService().shutdown()
