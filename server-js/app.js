@@ -1,8 +1,9 @@
 const WebSocket = require('ws');
+const ip = require('ip');
 
 const wss = new WebSocket.Server({ port: 5555 });
 
-console.log("server started..")
+console.log("server started in " + ip.address())
 
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
@@ -16,7 +17,7 @@ wss.broadcast = function broadcast(data) {
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(data) {
     // Broadcast to everyone else.
-    console.log("sending " + data + " from " + JSON.parse(data).device)
+    console.log("sending " + data + " to " + JSON.parse(data).device)
     wss.clients.forEach(function each(client) {
       client.send(data);
     });

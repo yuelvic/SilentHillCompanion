@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.xurpas.integration.BaseActivity
 import com.xurpas.integration.R
+import com.xurpas.integration.models.Message
 import com.xurpas.integration.ui.CallFragment
 import com.xurpas.integration.utils.Action
 import com.xurpas.integration.utils.Actor
@@ -48,8 +49,12 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
         super.onStop()
     }
 
-    override fun onReceive(message: String) {
-        when (message) {
+    override fun onReceive(text: String) {
+        val message: Message = gson.fromJson(text, Message::class.java) // parse command
+
+        if (message.device != deviceName) return
+
+        when (message.action) {
             Action.CALL_ON.action -> call()
             Action.CALL_OFF.action -> destroyCall()
             Action.LIGHT_ON.action -> turnOnLight()
@@ -66,7 +71,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
             Action.VOLUME_UP.action -> volumeUp()
             Action.VOLUME_DOWN.action -> volumeDown()
         }
-        super.onReceive(message)
+        super.onReceive(message.action)
     }
 
     override fun onNothingSelected(p0: AdapterView<*>?) {

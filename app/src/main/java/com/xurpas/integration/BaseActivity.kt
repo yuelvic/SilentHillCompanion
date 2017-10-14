@@ -28,7 +28,7 @@ open class BaseActivity: AppCompatActivity(), WebSocketManager.Callback {
         super.onStop()
     }
 
-    override fun onReceive(message: String) {
+    override fun onReceive(text: String) {
 
     }
 

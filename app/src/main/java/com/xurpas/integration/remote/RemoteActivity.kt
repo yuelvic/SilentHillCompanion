@@ -14,6 +14,8 @@ import com.xurpas.integration.utils.Action
  */
 class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
+    private var selectedDevice: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_remote)
@@ -28,7 +30,7 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
             R.id.toggle_light_blink -> action = if (enabled) Action.BLINK_ON.action else Action.BLINK_OFF.action
             R.id.toggle_call -> action = if (enabled) Action.CALL_ON.action else Action.CALL_OFF.action
         }
-        webSocket.send(action)
+        webSocket.send(gson.toJson(Message(selectedDevice, action)))
     }
 
     override fun onClick(view: View) {
@@ -40,7 +42,7 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
             R.id.btn_pyramid -> action = Action.SFX_PYRAMID.action
             R.id.btn_siren -> action = Action.SFX_SIREN.action
         }
-        webSocket.send(gson.toJson(Message(deviceName, action)))
+        webSocket.send(gson.toJson(Message(selectedDevice, action)))
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
@@ -48,7 +50,7 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
 
         val action = if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
             Action.VOLUME_UP.action else Action.VOLUME_DOWN.action
-        webSocket.send(action)
+        webSocket.send(gson.toJson(Message(selectedDevice, action)))
         return true
     }
 
@@ -56,8 +58,8 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
 
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-
+    override fun onItemSelected(adapter: AdapterView<*>, spinner: View?, position: Int, id: Long) {
+        selectedDevice = adapter.getItemAtPosition(position).toString()
     }
 
     /**
