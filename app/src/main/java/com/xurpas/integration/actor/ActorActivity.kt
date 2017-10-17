@@ -18,6 +18,7 @@ import com.xurpas.integration.models.Message
 import com.xurpas.integration.ui.CallFragment
 import com.xurpas.integration.utils.Action
 import com.xurpas.integration.utils.Actor
+import java.util.concurrent.ThreadLocalRandom
 
 
 /**
@@ -59,18 +60,24 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
             Action.CALL_OFF.action -> destroyCall()
             Action.LIGHT_ON.action -> turnOnLight()
             Action.LIGHT_OFF.action -> turnOffLight()
-            Action.BLINK_ON.action -> torchCallback.blink = true
-            Action.BLINK_OFF.action -> torchCallback.blink = false
+            Action.BLINK_ON.action -> {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                    torchCallback.blink = true
+            }
+            Action.BLINK_OFF.action -> {
+                if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
+                    torchCallback.blink = false
+            }
 
             Action.SFX_STOP.action -> releasePlayer()
-            Action.SFX_THEME.action -> playSFX(R.raw.theme)
-            Action.SFX_BANG.action -> playSFX(R.raw.bang)
-            Action.SFX_PYRAMID.action -> playSFX(R.raw.pyramid)
-            Action.SFX_PYRAMID_POV.action -> playSFX(R.raw.pyramid_pov)
-            Action.SFX_SIREN.action -> playSFX(R.raw.siren)
-            Action.SFX_INSECT.action -> playSFX(R.raw.insect)
-            Action.SFX_HOSPITAL.action -> playSFX(R.raw.hospital)
-            Action.SFX_OTHER_WORLD.action -> playSFX(R.raw.otherworld)
+            Action.SFX_THEME.action -> playSFX(R.raw.theme, false)
+            Action.SFX_BANG.action -> playSFX(R.raw.bang, false)
+            Action.SFX_PYRAMID.action -> playSFX(R.raw.pyramid, true)
+            Action.SFX_PYRAMID_POV.action -> playSFX(R.raw.pyramid_pov, true)
+            Action.SFX_SIREN.action -> playSFX(R.raw.siren, true)
+            Action.SFX_INSECT.action -> playSFX(R.raw.insect, false)
+            Action.SFX_HOSPITAL.action -> playSFX(R.raw.hospital, true)
+            Action.SFX_OTHER_WORLD.action -> playSFX(R.raw.otherworld, true)
 
             Action.VOLUME_UP.action -> volumeUp()
             Action.VOLUME_DOWN.action -> volumeDown()
@@ -121,8 +128,9 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
     /**
      * Initializes player
      */
-    private fun playSound(resId: Int) {
+    private fun playSound(resId: Int, looping: Boolean) {
         mediaPlayer = MediaPlayer.create(this, resId) // siren sound
+        mediaPlayer.isLooping = looping
         mediaPlayer.start()
     }
 
@@ -136,11 +144,11 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
     /**
      * Play a certain sound
      */
-    private fun playSFX(resId: Int) {
-        if (selectedAction != Actor.SFX.actor) return
+    private fun playSFX(resId: Int, looping: Boolean) {
+        if (selectedAction != Actor.SFX.actor && resId != R.raw.light) return
 
         releasePlayer()
-        playSound(resId)
+        playSound(resId, looping)
     }
 
     /**
@@ -171,6 +179,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
      */
     private fun turnOnLight() {
         toggleLight(255, true)
+        playSFX(R.raw.light, true)
     }
 
     /**
@@ -178,6 +187,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
      */
     private fun turnOffLight() {
         toggleLight(0, false)
+        releasePlayer()
     }
 
     /**
@@ -231,7 +241,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && blink) {
                 Thread(Runnable {
-                    Thread.sleep(100)
+                    Thread.sleep(ThreadLocalRandom.current().nextInt(50, 1000).toLong())
                     cameraManager.setTorchMode(cameraId, !enabled)
                 }).start()
             }

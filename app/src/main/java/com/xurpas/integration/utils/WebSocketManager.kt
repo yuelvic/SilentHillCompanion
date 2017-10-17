@@ -65,14 +65,14 @@ class WebSocketManager(gson: Gson, callback: Callback): WebSocketListener() {
     }
 
     /**
-     * Send action
+     * Send action as String
      */
     fun send(message: String) {
         webSocket.send(message)
     }
 
     /**
-     * Send action
+     * Send action as Message
      */
     fun send(message: Message) {
         webSocket.send(gson.toJson(message))

@@ -44,7 +44,7 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
         var action = ""
         when (view.id) {
             R.id.btn_auto -> {
-                autoManage() // run test
+                dryRun() // run test
                 return
             }
             R.id.btn_stop -> action = Action.SFX_STOP.action
@@ -121,7 +121,7 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
     /**
      * Run auto script
      */
-    private fun autoManage() {
+    private fun dryRun() {
         Log.d(TAG, "auto started")
         var step = 0
         var time = 0
