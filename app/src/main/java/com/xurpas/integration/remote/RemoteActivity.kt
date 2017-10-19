@@ -52,6 +52,8 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
             R.id.btn_bang -> action = Action.SFX_BANG.action
             R.id.btn_pyramid -> action = Action.SFX_PYRAMID.action
             R.id.btn_pov -> action = Action.SFX_PYRAMID_POV.action
+            R.id.btn_nurse -> action = Action.SFX_NURSE.action
+            R.id.btn_alessa -> action = Action.SFX_ALESSA.action
             R.id.btn_siren -> action = Action.SFX_SIREN.action
             R.id.btn_insect -> action = Action.SFX_INSECT.action
             R.id.btn_hospital -> action = Action.SFX_HOSPITAL.action
@@ -92,6 +94,8 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
         findViewById<Button>(R.id.btn_bang).setOnClickListener(this)
         findViewById<Button>(R.id.btn_pyramid).setOnClickListener(this)
         findViewById<Button>(R.id.btn_pov).setOnClickListener(this)
+        findViewById<Button>(R.id.btn_nurse).setOnClickListener(this)
+        findViewById<Button>(R.id.btn_alessa).setOnClickListener(this)
         findViewById<Button>(R.id.btn_siren).setOnClickListener(this)
         findViewById<Button>(R.id.btn_insect).setOnClickListener(this)
         findViewById<Button>(R.id.btn_hospital).setOnClickListener(this)

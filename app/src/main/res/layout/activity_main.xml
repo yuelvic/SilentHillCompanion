@@ -6,9 +6,16 @@
     tools:context="com.xurpas.integration.MainActivity">
 
     <Button
+        android:id="@+id/btn_fixed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_fixed"/>
+
+    <Button
         android:id="@+id/btn_remote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/btn_fixed"
         android:text="@string/button_remote" />
 
     <Button

@@ -1,6 +1,7 @@
 package com.xurpas.integration.actor
 
 import android.content.Context
+import android.graphics.Color
 import android.hardware.camera2.CameraManager
 import android.media.AudioManager
 import android.media.MediaPlayer
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.RelativeLayout
 import android.widget.Spinner
 import com.xurpas.integration.BaseActivity
 import com.xurpas.integration.R
@@ -18,6 +20,7 @@ import com.xurpas.integration.models.Message
 import com.xurpas.integration.ui.CallFragment
 import com.xurpas.integration.utils.Action
 import com.xurpas.integration.utils.Actor
+import kotlinx.android.synthetic.main.activity_actor.*
 import java.util.concurrent.ThreadLocalRandom
 
 
@@ -58,8 +61,8 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
         when (message.action) {
             Action.CALL_ON.action -> call()
             Action.CALL_OFF.action -> destroyCall()
-            Action.LIGHT_ON.action -> turnOnLight()
-            Action.LIGHT_OFF.action -> turnOffLight()
+            Action.LIGHT_ON.action -> toggleBright()
+            Action.LIGHT_OFF.action -> toggleDim()
             Action.BLINK_ON.action -> {
                 if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
                     torchCallback.blink = true
@@ -74,6 +77,8 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
             Action.SFX_BANG.action -> playSFX(R.raw.bang, false)
             Action.SFX_PYRAMID.action -> playSFX(R.raw.pyramid, true)
             Action.SFX_PYRAMID_POV.action -> playSFX(R.raw.pyramid_pov, true)
+            Action.SFX_NURSE.action -> playSFX(R.raw.nurse, false)
+            Action.SFX_ALESSA.action -> playSFX(R.raw.alessa, false)
             Action.SFX_SIREN.action -> playSFX(R.raw.siren, true)
             Action.SFX_INSECT.action -> playSFX(R.raw.insect, false)
             Action.SFX_HOSPITAL.action -> playSFX(R.raw.hospital, true)
@@ -145,7 +150,7 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
      * Play a certain sound
      */
     private fun playSFX(resId: Int, looping: Boolean) {
-        if (selectedAction != Actor.SFX.actor && resId != R.raw.light) return
+        if (selectedAction != Actor.SFX.actor) return
 
         releasePlayer()
         playSound(resId, looping)
@@ -179,7 +184,6 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
      */
     private fun turnOnLight() {
         toggleLight(255, true)
-        playSFX(R.raw.light, true)
     }
 
     /**
@@ -187,7 +191,6 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
      */
     private fun turnOffLight() {
         toggleLight(0, false)
-        releasePlayer()
     }
 
     /**
@@ -199,12 +202,67 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
     private fun toggleLight(value: Int, torchMode: Boolean) {
         if (selectedAction != Actor.FLASHLIGHT.actor) return
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             cameraManager.setTorchMode(cameraId, torchMode) // torch toggle
+
+            if (torchMode) {
+                releasePlayer() // release player
+                playSound(R.raw.light, true) // light sound
+            } else releasePlayer() // release player
+        }
+
+        val backgroundColor = if (torchMode) Color.WHITE else Color.BLACK
+        runOnUiThread { findViewById<RelativeLayout>(R.id.view_actor).setBackgroundColor(backgroundColor) }
 
         try {
             Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
             Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, value)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * Toggles bright mode
+     */
+    private fun toggleBright() {
+        if (selectedAction != Actor.FLASHLIGHT.actor) return
+
+        try {
+            Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
+            Thread( Runnable {
+                runOnUiThread { view_actor.setBackgroundColor(Color.WHITE) }
+                var brightness = 0
+                while (brightness <= 255) {
+                    try {
+                        Thread.sleep(10)
+                        Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, brightness++)
+                    } catch (ex: InterruptedException) { ex.printStackTrace() }
+                }
+            } ).start()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    /**
+     * Toggles dim mode
+     */
+    private fun toggleDim() {
+        if (selectedAction != Actor.FLASHLIGHT.actor) return
+
+        try {
+            Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS_MODE, Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL)
+            Thread( Runnable {
+                var brightness = 255
+                while (brightness >= 0) {
+                    try {
+                        Thread.sleep(100)
+                        Settings.System.putInt(contentResolver, Settings.System.SCREEN_BRIGHTNESS, brightness--)
+                    } catch (ex: InterruptedException) { ex.printStackTrace() }
+                }
+                runOnUiThread { view_actor.setBackgroundColor(Color.BLACK) }
+            } ).start()
         } catch (e: Exception) {
             e.printStackTrace()
         }

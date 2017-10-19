@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hospital"/>
+
+        <Button
+            android:id="@+id/btn_siren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Siren"/>
+
+        <Button
+            android:id="@+id/btn_growl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Growl"/>
+
+        <Button
+            android:id="@+id/btn_pyramid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pyramid"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other"/>
+
+        <Button
+            android:id="@+id/btn_insect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Insect"/>
+
+        <Button
+            android:id="@+id/btn_nurse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nurse"/>
+
+        <Button
+            android:id="@+id/btn_alessa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alessa"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stop"/>
+
+        <Button
+            android:id="@+id/btn_auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Auto"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".actor.ActorActivity"/>
         <activity android:name=".remote.RemoteActivity"/>
+        <activity android:name=".remote.FixedActivity"/>
     </application>
 
 </manifest>

@@ -132,6 +132,18 @@
             android:layout_height="wrap_content"
             android:text="Auto"/>
 
+        <Button
+            android:id="@+id/btn_nurse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nurse"/>
+
+        <Button
+            android:id="@+id/btn_alessa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alessa"/>
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

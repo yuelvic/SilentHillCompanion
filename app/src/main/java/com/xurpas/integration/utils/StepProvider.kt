@@ -12,6 +12,20 @@ object StepProvider {
     val POV = 70000
     val STOP = 90000
 
+    object Device {
+
+        val ALL = "All"
+        val ACER_BLACK = "T02"
+        val OPPO_BLACK = "1201"
+        val HTC_RED = "HTC One_M8"
+        val ASUS_BLACK = "ASUS_X013D"
+        val SAMSUNG_WHITE = "SM-J710GN"
+        val SAMSUNG_BLACK = "Galaxy S8"
+        val OPPO_WHITE = "A1601"
+        val ACER_WHITE = "Liquid Zest Plus"
+
+    }
+
     private val steps = arrayOf(
             "Liquid Zest Plus \t Hospital",
             "T02 \t Siren",

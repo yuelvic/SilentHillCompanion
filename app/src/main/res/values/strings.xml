@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Silent Hill Companion</string>
 
+    <string name="button_fixed">Fixed</string>
     <string name="button_remote">Remote</string>
     <string name="button_actor">Actor</string>
 
@@ -33,5 +34,8 @@
         <item>ASUS_X013D</item>
         <item>HTC One_M8</item>
         <item>Galaxy S8</item>
+        <item>SM-J710GN</item>
+        <item>A1601</item>
+        <item>SM-G570Y</item>
     </string-array>
 </resources>

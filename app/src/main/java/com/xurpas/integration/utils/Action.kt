@@ -16,6 +16,8 @@ enum class Action(val action: String) {
     SFX_THEME("sfx_theme"),
     SFX_PYRAMID("sfx_pyramid"),
     SFX_PYRAMID_POV("sfx_pyramid_pov"),
+    SFX_NURSE("sfx_nurse"),
+    SFX_ALESSA("sfx_alessa"),
     SFX_SIREN("sfx_siren"),
     SFX_INSECT("sfx_insect"),
     SFX_HOSPITAL("sfx_hospital"),
