@@ -65,9 +65,10 @@ class RemoteActivity: BaseActivity(), CompoundButton.OnCheckedChangeListener, Vi
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         super.onKeyDown(keyCode, event)
 
-        val action = if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
-            Action.VOLUME_UP.action else Action.VOLUME_DOWN.action
-        sendMessage(selectedDevice, action)
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
+            sendMessage(selectedDevice, Action.VOLUME_UP.action)
+        else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+            sendMessage(selectedDevice, Action.VOLUME_DOWN.action)
         return true
     }
 

@@ -61,8 +61,8 @@ class ActorActivity: BaseActivity(), AdapterView.OnItemSelectedListener {
         when (message.action) {
             Action.CALL_ON.action -> call()
             Action.CALL_OFF.action -> destroyCall()
-            Action.LIGHT_ON.action -> toggleBright()
-            Action.LIGHT_OFF.action -> toggleDim()
+            Action.LIGHT_ON.action -> turnOnLight()
+            Action.LIGHT_OFF.action -> turnOffLight()
             Action.BLINK_ON.action -> {
                 if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M)
                     torchCallback.blink = true

@@ -32,6 +32,7 @@ class FixedActivity: BaseActivity(), View.OnClickListener {
             R.id.btn_nurse -> triggerNurse()
             R.id.btn_alessa -> triggerAlessa()
             R.id.btn_stop -> triggerStop()
+            R.id.btn_inc -> triggerInit()
         }
     }
 
@@ -48,6 +49,13 @@ class FixedActivity: BaseActivity(), View.OnClickListener {
         findViewById<Button>(R.id.btn_nurse).setOnClickListener(this)
         findViewById<Button>(R.id.btn_alessa).setOnClickListener(this)
         findViewById<Button>(R.id.btn_stop).setOnClickListener(this)
+    }
+
+    /**
+     * Increases all devices' volume
+     */
+    private fun triggerInit() {
+        triggerVolume(StepProvider.Device.ALL, 20, true)
     }
 
     /**
